@@ -14,15 +14,17 @@ func isTriangle(a, b, c float64) bool {
 }
 
 func KindFromSides(a, b, c float64) Kind {
-	kind := Sca
-
 	if !isTriangle(a, b, c) {
-		kind = NaT
-	} else if a == b && b == c {
-		kind = Equ
-	} else if a == b || b == c || a == c {
-		kind = Iso
+		return NaT
 	}
 
-	return kind
+	if a == b && b == c {
+		return Equ
+	}
+
+	if a == b || b == c || a == c {
+		return Iso
+	}
+
+	return Sca
 }
