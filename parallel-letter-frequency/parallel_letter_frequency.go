@@ -1,31 +1,28 @@
 package letter
 
+import "sync"
+
 const testVersion = 1
 
-// In which I write my own frequency() function because I didn't read the directions
-func ConcurrentFrequency(s []string) map[rune]int {
-	freq := make(map[rune]int)
-	counts := make([]map[rune]int, len(s))
+var wg sync.WaitGroup
+
+func ConcurrentFrequency(s []string) FreqMap {
+	freq := FreqMap{}
+	counts := make([]FreqMap, len(s))
+	wg.Add(len(s))
 
 	for i, str := range s {
-		counts[i] = frequency(str)
+		go func(str string, i int) {
+			counts[i] = Frequency(str)
+			wg.Done()
+		}(str, i)
 	}
+	wg.Wait()
 
 	for _, count := range counts {
 		for k, v := range count {
 			freq[k] += v
 		}
-	}
-
-	return freq
-}
-
-func frequency(str string) map[rune]int {
-	freq := make(map[rune]int)
-	letters := []rune(str)
-
-	for _, letter := range letters {
-		freq[letter]++
 	}
 
 	return freq
