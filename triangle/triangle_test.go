@@ -20,19 +20,19 @@ var testData = []testCase{
 	{Iso, 4, 3, 4},    // first and last sides equal
 	{Iso, 4, 4, 3},    // first two sides equal
 	{Iso, 10, 10, 2},  // again
-	// {Iso, 2, 4, 2},    // a "triangle" that is just a line is still OK
+	{Iso, 2, 4, 2},    // a "triangle" that is just a line is still OK
 	{Sca, 3, 4, 5},    // no sides equal
 	{Sca, 10, 11, 12}, // again
 	{Sca, 5, 4, 2},    // descending order
 	{Sca, .4, .6, .3}, // small sides
-	// {Sca, 1, 4, 3},    // a "triangle" that is just a line is still OK
-	{Sca, 5, 4, 6},  // 2a == b+c looks like equilateral, but isn't always.
-	{Sca, 6, 4, 5},  // 2a == b+c looks like equilateral, but isn't always.
-	{NaT, 0, 0, 0},  // zero length
-	{NaT, 3, 4, -5}, // negative length
-	{NaT, 1, 1, 3},  // fails triangle inequality
-	{NaT, 2, 5, 2},  // another
-	{NaT, 7, 3, 2},  // another
+	{Sca, 1, 4, 3},    // a "triangle" that is just a line is still OK
+	{Sca, 5, 4, 6},    // 2a == b+c looks like equilateral, but isn't always.
+	{Sca, 6, 4, 5},    // 2a == b+c looks like equilateral, but isn't always.
+	{NaT, 0, 0, 0},    // zero length
+	{NaT, 3, 4, -5},   // negative length
+	{NaT, 1, 1, 3},    // fails triangle inequality
+	{NaT, 2, 5, 2},    // another
+	{NaT, 7, 3, 2},    // another
 }
 
 // generate cases with NaN and Infs, append to basic cases
