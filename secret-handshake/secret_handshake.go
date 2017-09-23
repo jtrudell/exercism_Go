@@ -12,7 +12,7 @@ func Reverse(s []string) []string {
 }
 
 func Handshake(num uint) []string {
-	res := []string{}
+	res := make([]string, 0, 4)
 	reverse := true
 
 	if num >= 16 {
