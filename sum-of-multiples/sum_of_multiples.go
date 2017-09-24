@@ -8,7 +8,7 @@ func SumMultiples(limit int, divisors ...int) int {
 
 	for i, val := range divisors {
 		for val < limit {
-			if multiples[val] == 0 {
+			if _, ok := multiples[val]; !ok {
 				multiples[val] = sum + val
 				sum = multiples[val]
 			}
