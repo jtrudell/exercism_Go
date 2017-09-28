@@ -1,24 +1,57 @@
 package pythagorean
 
-// The three elements of each returned triplet must be in order,
-// t[0] <= t[1] <= t[2], and the list of triplets must be in lexicographic
-// order.
+import (
+	"math"
+)
 
 const testVersion = 1
 
 type Triplet [3]int
 
-// Range returns a list of all Pythagorean triplets with sides in the
+// Range returns a slice of Triplet with sides in the
 // range min to max inclusive.
 func Range(min, max int) []Triplet {
-	x := []Triplet{Triplet{1, 2, 3}}
+	var triplets []Triplet
+	var squares []int
 
-	return x
+	for num := min; num <= max; num++ {
+		squares = append(squares, num*num)
+	}
+
+	for i, valA := range squares {
+		for j := i + 1; j < len(squares)-2; j++ {
+			valB := squares[j]
+			sum := valA + valB
+			if findItem(squares[j+1:], sum) {
+				c := math.Sqrt(float64(sum))
+				triplets = append(triplets, Triplet{min + i, min + j, int(c)})
+			}
+
+		}
+	}
+
+	return triplets
 }
 
-// Sum returns a list of all Pythagorean triplets where the sum a+b+c
-// (the perimeter) is equal to p.
+// Sum returns a slice of Triplet where the sum a+b+c of each Triplet
+// (the perimeter) is equal to p
 func Sum(p int) []Triplet {
-	x := []Triplet{Triplet{1, 2, 3}}
-	return x
+	var triplets []Triplet
+	allTriplets := Range(1, p)
+	for _, triplet := range allTriplets {
+		if triplet[0]+triplet[1]+triplet[2] == p {
+			triplets = append(triplets, triplet)
+		}
+	}
+	return triplets
+}
+
+// findItem returns true if num is found in a slice of int and false otherwise
+func findItem(x []int, num int) bool {
+	for _, val := range x {
+		if val == num {
+			return true
+		}
+	}
+	return false
 }
